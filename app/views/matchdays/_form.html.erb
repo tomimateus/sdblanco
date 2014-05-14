@@ -1,0 +1,25 @@
+<%= form_for(@matchday) do |f| %>
+  <% if @matchday.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@matchday.errors.count, "error") %> prohibited this matchday from being saved:</h2>
+
+      <ul>
+      <% @matchday.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :number %><br>
+    <%= f.number_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :tournament_id %><br>
+    <%= f.number_field :tournament_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

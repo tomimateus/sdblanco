@@ -1,0 +1,31 @@
+<h1>Listing match_teams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Local</th>
+      <th>Match</th>
+      <th>Team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @match_teams.each do |match_team| %>
+      <tr>
+        <td><%= match_team.local %></td>
+        <td><%= match_team.match_id %></td>
+        <td><%= match_team.team_id %></td>
+        <td><%= link_to 'Show', match_team %></td>
+        <td><%= link_to 'Edit', edit_match_team_path(match_team) %></td>
+        <td><%= link_to 'Destroy', match_team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Match team', new_match_team_path %>

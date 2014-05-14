@@ -1,0 +1,47 @@
+<h1>Listing statistics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Points</th>
+      <th>Played</th>
+      <th>Won</th>
+      <th>Tied</th>
+      <th>Lost</th>
+      <th>Goals scored</th>
+      <th>Goals received</th>
+      <th>Red cards</th>
+      <th>Yellow cards</th>
+      <th>Tournament</th>
+      <th>Team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @statistics.each do |statistic| %>
+      <tr>
+        <td><%= statistic.points %></td>
+        <td><%= statistic.played %></td>
+        <td><%= statistic.won %></td>
+        <td><%= statistic.tied %></td>
+        <td><%= statistic.lost %></td>
+        <td><%= statistic.goals_scored %></td>
+        <td><%= statistic.goals_received %></td>
+        <td><%= statistic.red_cards %></td>
+        <td><%= statistic.yellow_cards %></td>
+        <td><%= statistic.tournament_id %></td>
+        <td><%= statistic.team_id %></td>
+        <td><%= link_to 'Show', statistic %></td>
+        <td><%= link_to 'Edit', edit_statistic_path(statistic) %></td>
+        <td><%= link_to 'Destroy', statistic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Statistic', new_statistic_path %>

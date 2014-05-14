@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  played: false
+  matchday_id: 1
+
+two:
+  played: false
+  matchday_id: 1

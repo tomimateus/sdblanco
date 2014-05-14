@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @matchday.number %>
+</p>
+
+<p>
+  <strong>Tournament:</strong>
+  <%= @matchday.tournament_id %>
+</p>
+
+<%= link_to 'Edit', edit_matchday_path(@matchday) %> |
+<%= link_to 'Back', matchdays_path %>

@@ -1,0 +1,61 @@
+<%= form_for(@statistic) do |f| %>
+  <% if @statistic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@statistic.errors.count, "error") %> prohibited this statistic from being saved:</h2>
+
+      <ul>
+      <% @statistic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :points %><br>
+    <%= f.number_field :points %>
+  </div>
+  <div class="field">
+    <%= f.label :played %><br>
+    <%= f.number_field :played %>
+  </div>
+  <div class="field">
+    <%= f.label :won %><br>
+    <%= f.number_field :won %>
+  </div>
+  <div class="field">
+    <%= f.label :tied %><br>
+    <%= f.number_field :tied %>
+  </div>
+  <div class="field">
+    <%= f.label :lost %><br>
+    <%= f.number_field :lost %>
+  </div>
+  <div class="field">
+    <%= f.label :goals_scored %><br>
+    <%= f.number_field :goals_scored %>
+  </div>
+  <div class="field">
+    <%= f.label :goals_received %><br>
+    <%= f.number_field :goals_received %>
+  </div>
+  <div class="field">
+    <%= f.label :red_cards %><br>
+    <%= f.number_field :red_cards %>
+  </div>
+  <div class="field">
+    <%= f.label :yellow_cards %><br>
+    <%= f.number_field :yellow_cards %>
+  </div>
+  <div class="field">
+    <%= f.label :tournament_id %><br>
+    <%= f.number_field :tournament_id %>
+  </div>
+  <div class="field">
+    <%= f.label :team_id %><br>
+    <%= f.number_field :team_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
