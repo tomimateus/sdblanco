@@ -5,5 +5,15 @@
   <%= @tournament.name %>
 </p>
 
+<table>
+  <tbody>
+  <% @tournament.matchdays.each do |matchday| %>
+      <tr>
+        <td><%= link_to 'Fecha ' + matchday.number.to_s, edit_matchday_path(matchday) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>

@@ -1,6 +1,14 @@
-<h1>Editing matchday</h1>
+<h1>Fecha <%= @matchday.number %></h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @matchday %> |
-<%= link_to 'Back', matchdays_path %>
+<form id="form">
+  <% @matchday.matches.each do |match| %>
+    <fieldset>
+      <label for="local"><%= match.match_teams[0].team.name %></label>
+      <input id="local" type="number"/>
+      <input id="visit" type="number"/>
+      <label for="visit"></label><%= match.match_teams[1].team.name %>
+    </fieldset>
+  <% end %>
+  <button> Guardar </button>
+  <button> Cancelar </button>
+</form>

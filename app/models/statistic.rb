@@ -15,5 +15,4 @@ class Statistic < ActiveRecord::Base
     self.red_cards = 0
     self.yellow_cards = 0
   end
-
 end

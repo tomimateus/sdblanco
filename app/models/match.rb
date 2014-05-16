@@ -4,4 +4,5 @@ class Match < ActiveRecord::Base
   has_many :match_players
 
   validates :match_teams, length: { is: 2 }
+
 end
