@@ -25,6 +25,7 @@ class MatchdaysController < ApplicationController
   # POST /matchdays.json
   def create
     @matchday = Matchday.new(matchday_params)
+    @matchday.goals = 0
 
     respond_to do |format|
       if @matchday.save
@@ -40,15 +41,27 @@ class MatchdaysController < ApplicationController
   # PATCH/PUT /matchdays/1
   # PATCH/PUT /matchdays/1.json
   def update
-    respond_to do |format|
-      if @matchday.update(matchday_params)
-        format.html { redirect_to @matchday, notice: 'Matchday was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @matchday.errors, status: :unprocessable_entity }
+    for i in 0..@matchday.matches.size-1
+      match = @matchday.matches[i]
+      local = match.match_teams[0].team
+      match.match_players.each do |match_player|
+        local_goals = params.fetch('local_goals_'+i.to_s)
+        visit_goals = params.fetch('visit_goals_'+i.to_s)
+        if local_goals!='' && visit_goals!=''
+          if match_player.player.team == local
+            match_player.goals = local_goals.to_i
+          else
+            match_player.goals = visit_goals.to_i
+          end
+          match_player.save
+          match.play
+          match.save
+        end
       end
     end
+    @matchday.tournament.update_statistics(@matchday.number)
+
+    redirect_to @matchday.tournament, notice: 'Resultados de Fecha ' + @matchday.number.to_s + ' guardados.'
   end
 
   # DELETE /matchdays/1

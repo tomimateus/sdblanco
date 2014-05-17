@@ -1,14 +1,20 @@
 <h1>Fecha <%= @matchday.number %></h1>
 
-<form id="form">
-  <% @matchday.matches.each do |match| %>
+<%= form_for(@matchday) do |f| %>
+
+  <% for i in 0..@matchday.matches.size-1 %>
+  <% match = @matchday.matches[i] %>
     <fieldset>
-      <label for="local"><%= match.match_teams[0].team.name %></label>
-      <input id="local" type="number"/>
-      <input id="visit" type="number"/>
-      <label for="visit"></label><%= match.match_teams[1].team.name %>
+      <label><%= match.match_teams[0].team.name %></label>
+      <%= number_field_tag 'local_goals_'+i.to_s %>
+      <%= number_field_tag 'visit_goals_'+i.to_s %>
+      <label><%= match.match_teams[1].team.name %></label>
     </fieldset>
   <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
   <button> Guardar </button>
   <button> Cancelar </button>
-</form>
+
+<% end %>
