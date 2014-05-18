@@ -13,4 +13,14 @@ class Team < ActiveRecord::Base
     player_id = players[0].id
     MatchPlayer.find_by_match_id_and_player_id(match_id, player_id).goals
   end
+
+  def yellow_cards(match_id)
+    player_id = players[0].id
+    MatchPlayer.find_by_match_id_and_player_id(match_id, player_id).yellow_cards
+  end
+
+  def red_cards(match_id)
+    player_id = players[0].id
+    MatchPlayer.find_by_match_id_and_player_id(match_id, player_id).red_cards
+  end
 end

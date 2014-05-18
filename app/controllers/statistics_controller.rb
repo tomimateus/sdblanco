@@ -5,6 +5,7 @@ class StatisticsController < ApplicationController
   # GET /statistics.json
   def index
     @statistics = Statistic.all
+    @statistics.sort_by!{|x| [-x.points, x.red_cards, x.yellow_cards, -x.goals_scored, x.goals_received]}
   end
 
   # GET /statistics/1

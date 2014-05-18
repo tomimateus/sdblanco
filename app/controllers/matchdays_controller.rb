@@ -43,23 +43,12 @@ class MatchdaysController < ApplicationController
   def update
     for i in 0..@matchday.matches.size-1
       match = @matchday.matches[i]
-      local = match.match_teams[0].team
-      match.match_players.each do |match_player|
-        local_goals = params.fetch('local_goals_'+i.to_s)
-        visit_goals = params.fetch('visit_goals_'+i.to_s)
-        if local_goals!='' && visit_goals!=''
-          if match_player.player.team == local
-            match_player.goals = local_goals.to_i
-          else
-            match_player.goals = visit_goals.to_i
-          end
-          match_player.save
-          match.play
-          match.save
-        end
+      unless match.played
+        local_data = [params.fetch('local_goals_'+i.to_s), params.fetch('local_yellows_'+i.to_s), params.fetch('local_reds_'+i.to_s)]
+        visit_data = [params.fetch('visit_goals_'+i.to_s), params.fetch('visit_yellows_'+i.to_s), params.fetch('visit_reds_'+i.to_s)]
+        match.update_result(local_data, visit_data)
       end
     end
-    @matchday.tournament.update_statistics(@matchday.number)
 
     redirect_to @matchday.tournament, notice: 'Resultados de Fecha ' + @matchday.number.to_s + ' guardados.'
   end

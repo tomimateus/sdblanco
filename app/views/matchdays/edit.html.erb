@@ -4,10 +4,36 @@
 
   <% for i in 0..@matchday.matches.size-1 %>
   <% match = @matchday.matches[i] %>
+    <% played = match.played %>
     <fieldset>
       <label><%= match.match_teams[0].team.name %></label>
-      <%= number_field_tag 'local_goals_'+i.to_s %>
-      <%= number_field_tag 'visit_goals_'+i.to_s %>
+      <% if played %>
+        <%= number_field_tag 'local_goals_'+i.to_s, match.local.goals(match.id), :disabled => played %>
+        <%= label_tag '', match.local.yellow_cards(match.id), id: 'local_yellows_'+i.to_s %>
+        <%= label_tag '', match.local.red_cards(match.id), id: 'local_reds_'+i.to_s %>
+        <%= number_field_tag 'visit_goals_'+i.to_s, match.visit.goals(match.id), :disabled => played %>
+        <%= label_tag '', match.visit.yellow_cards(match.id), id: 'visit_yellows_'+i.to_s %>
+        <%= label_tag '', match.visit.red_cards(match.id), id: 'visit_reds_'+i.to_s %>
+      <% else %>
+        <%= number_field_tag 'local_goals_'+i.to_s, '', :disabled => played %>
+          <%= label_tag '', match.local.yellow_cards(match.id), id: 'local_yellows_'+i.to_s %>
+          <%= hidden_field_tag 'local_yellows_'+i.to_s, 0, id: 'hidden_local_yellows_'+i.to_s %>
+            <%= label_tag '+', '+', :onclick => 'yellowCards("local", '+i.to_s+', "+")' %>
+            <%= label_tag '-', '-', :onclick => 'yellowCards("local", '+i.to_s+', "-")' %>
+          <%= label_tag '', match.local.red_cards(match.id), id: 'local_reds_'+i.to_s %>
+          <%= hidden_field_tag 'local_reds_'+i.to_s, 0, id: 'hidden_local_reds_'+i.to_s %>
+            <%= label_tag '+', '+', :onclick => 'redCards("local", '+i.to_s+', "+")' %>
+            <%= label_tag '-', '-', :onclick => 'redCards("local", '+i.to_s+', "-")' %>
+        <%= number_field_tag 'visit_goals_'+i.to_s, '', :disabled => played %>
+          <%= label_tag '', match.visit.yellow_cards(match.id), id: 'visit_yellows_'+i.to_s %>
+          <%= hidden_field_tag 'visit_yellows_'+i.to_s, 0, id: 'hidden_visit_yellows_'+i.to_s %>
+            <%= label_tag '+', '+', :onclick => 'yellowCards("visit", '+i.to_s+', "+")' %>
+            <%= label_tag '-', '-', :onclick => 'yellowCards("visit", '+i.to_s+', "-")' %>
+          <%= label_tag '', match.visit.red_cards(match.id), id: 'visit_reds_'+i.to_s %>
+          <%= hidden_field_tag 'visit_reds_'+i.to_s, 0, id: 'hidden_visit_reds_'+i.to_s %>
+            <%= label_tag '+', '+', :onclick => 'redCards("visit", '+i.to_s+', "+")' %>
+            <%= label_tag '-', '-', :onclick => 'redCards("visit", '+i.to_s+', "-")' %>
+    <% end %>
       <label><%= match.match_teams[1].team.name %></label>
     </fieldset>
   <% end %>

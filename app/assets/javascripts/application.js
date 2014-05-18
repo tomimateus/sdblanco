@@ -14,3 +14,25 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function yellowCards(team, id, op) {
+    cards = parseInt(document.getElementById(team + '_yellows_' + id).innerHTML);
+    if (op == '+') {
+        document.getElementById(team + '_yellows_' + id).innerHTML = cards + 1;
+        document.getElementById('hidden_' + team + '_yellows_' + id).value = cards + 1;
+    } else if (op == '-' && cards > 0) {
+        document.getElementById(team + '_yellows_' + id).innerHTML = cards - 1;
+        document.getElementById('hidden_' + team + '_yellows_' + id).value = cards - 1;
+    }
+}
+
+function redCards(team, id, op) {
+    cards = parseInt(document.getElementById(team + '_reds_' + id).innerHTML);
+    if (op == '+') {
+        document.getElementById(team + '_reds_' + id).innerHTML = cards + 1;
+        document.getElementById('hidden_' + team + '_reds_' + id).value = cards + 1;
+    } else if (op == '-' && cards > 0) {
+        document.getElementById(team + '_reds_' + id).innerHTML = cards - 1;
+        document.getElementById('hidden_' + team + '_reds_' + id).value = cards - 1;
+    }
+}
